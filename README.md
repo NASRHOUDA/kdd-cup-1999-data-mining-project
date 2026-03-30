@@ -74,42 +74,47 @@ RAW DATA          PREPARATION          EDA               MODÉLISATION
 ## 📁 Structure du Projet
 
 ```
-kdd-cup-1999-data-mining-project/
-│
-├── 📄 README.md
-├── 📄 requirements.txt
-├── 📄 LICENSE
+kdd-cup-1999-intrusion-detection/
 │
 ├── 📁 data/
-│   ├── raw/
+│   ├── raw/                             # Données brutes originales
 │   │   ├── kddcup.data_10_percent       # 494k connexions (74.9 MB)
-│   │   ├── kddcup.names                 # Noms des 41 features
-│   │   └── training_attack_types        # Mapping des attaques
+│   │   ├── kddcup.names                 # Noms et types des 41 features
+│   │   └── training_attack_types        # Mapping attaques → catégorie
 │   │
-│   └── prepared/
+│   └── prepared/                        # Données nettoyées et transformées
 │       ├── X_train_prepared.csv         # Features entraînement (25.9 MB)
 │       ├── X_test_prepared.csv          # Features test (6.5 MB)
-│       ├── y_train.csv / y_test.csv     # Labels
-│       ├── scaler.pkl                   # StandardScaler
-│       ├── label_encoder_flag.pkl       # Encodeur flag
-│       ├── label_encoder_service.pkl    # Encodeur service
-│       └── attack_mapping.json
+│       ├── y_train.csv                  # Labels entraînement
+│       ├── y_test.csv                   # Labels test
+│       ├── attack_mapping.json          # Dictionnaire de mapping des attaques
+│       ├── scaler.pkl                   # StandardScaler fitted
+│       ├── label_encoder_flag.pkl       # Encodeur variable flag
+│       └── label_encoder_service.pkl    # Encodeur variable service
 │
 ├── 📓 notebooks/
-│   ├── 01_data_preparation.ipynb        # P2 — Nettoyage & préparation
+│   ├── 01_data_preparation.ipynb        # P2 — Nettoyage, encodage, normalisation
 │   ├── 02_exploratory_data_analysis.ipynb  # P3 — EDA & visualisations
 │   └── 03_modeling_evaluation.ipynb     # P4 — Modélisation & évaluation
 │
 ├── 📊 results/
-│   ├── figures/                         # Visualisations EDA (PNG)
-│   └── models/                          # Modèles sauvegardés
+│   ├── figures/                         # Visualisations générées par l'EDA
+│   │   ├── eda_01_class_distribution.png
+│   │   ├── eda_02_protocol_vs_class.png
+│   │   ├── eda_03_correlation_heatmap.png
+│   │   ├── eda_04_distributions_by_class.png
+│   │   ├── eda_05_boxplots.png
+│   │   ├── eda_06_feature_importance.png
+│   │   ├── eda_07_error_rates_by_class.png
+│   │   └── eda_08_project_schema.png
+│   └── models/                          # Modèles entraînés sauvegardés
 │
 ├── 📚 docs/
-│   ├── project_architecture.gif
-│   └── confusion_lr.png / confusion_rf.png
+│   ├── kddcup.names                     # Documentation des features
+│   ├── training_attack_types            # Documentation des types d'attaques
+│   └── project_architecture.gif        # Animation du pipeline complet
 │
-└── 🔧 src/
-    └── preprocessor.py                  # Fonctions de preprocessing
+└── 📁 src/                              # Utilitaires Python
 ```
 
 ---
@@ -181,10 +186,10 @@ Exécuter les notebooks **dans l'ordre** :
 
 | Membre | Phase | Responsabilités |
 |--------|-------|-----------------|
-| **Zainab El Bouyed** | P1 — Data Understanding |
-| **Houda Nasr** | P2 — Data Preparation |
-| **Meryem El Mansouri** | P3 — EDA | Analyses exploratoires, graphiques |
-| **Majda Bendifi** | P4 — Modeling | Modèles ML, évaluation, résultats |
+| **Zainab El Bouyed** | P1 — Data Understanding | Exploration initiale, compréhension du dataset, documentation des features |
+| **Houda Nasr** | P2 — Data Preparation | Nettoyage, déduplication, encodage, normalisation, rééquilibrage |
+| **Meryem El Mansouri** | P3 — EDA | Analyses exploratoires, visualisations, feature importance |
+| **Majda Bendifi** | P4 — Modeling | Entraînement des modèles, évaluation, comparaison des résultats |
 
 *Encadré par : **Mme EL ASRI IKRAM***
 
